@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>バイブコーディング - AI時代の新しいものづくりへ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* ヘッダー */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(30px, 30px) rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button::before {
+            content: "👇";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(-50%); }
+            40% { transform: translateY(-50%) translateY(-5px); }
+            60% { transform: translateY(-50%) translateY(-3px); }
+        }
+
+        .cta-button {
+            padding-left: 50px;
+        }
+
+        /* 共感エリア */
+        .empathy-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .empathy-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .worry-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .worry-item {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 20px;
+            border: 2px solid #e9ecef;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .worry-item:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .worry-item::before {
+            content: "😔";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 1.5rem;
+            background: white;
+            padding: 0 5px;
+        }
+
+        /* ロードマップ */
+        .roadmap-section {
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #f8f9fa, white);
+        }
+
+        .roadmap-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .roadmap-subtitle {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        .roadmap {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .step {
+            position: relative;
+            padding: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-content {
+            width: 45%;
+            background: white;
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .step-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            padding: 30px;
+            cursor: pointer;
+        }
+
+        .step-image {
+            width: calc(100% + 60px);
+            height: 200px;
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            margin: -30px -30px 30px -30px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-image img {
+            max-width: 90%;
+            max-height: 160px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .step-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .step-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 2px solid #667eea;
+        }
+
+        .step-content:hover .step-title {
+            color: #667eea;
+        }
+
+        .step-content:hover .step-image img {
+            transform: scale(1.08);
+        }
+
+        .step-number {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #667eea;
+            z-index: 2;
+        }
+
+
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .step-catch {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .step-catch::after {
+            content: " →";
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-content:hover .step-catch::after {
+            opacity: 1;
+        }
+
+        .step-description {
+            color: #6c757d;
+            line-height: 1.8;
+        }
+
+        /* CTA セクション */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .cta-section .cta-button {
+            background: white;
+            color: #667eea;
+            font-size: 1.2rem;
+            padding: 20px 50px;
+        }
+
+        .cta-section .cta-button:hover {
+            background: #f8f9fa;
+        }
+
+        .cta-section .cta-button::before {
+            content: "📖";
+            animation: none;
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question::before {
+            content: "Q";
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .faq-answer {
+            color: #6c757d;
+            padding-left: 45px;
+        }
+
+        /* フッター */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        /* スムーススクロール */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .roadmap::before {
+                display: none;
+            }
+
+            .step {
+                flex-direction: column !important;
+            }
+
+            .step-content {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .step-image {
+                height: 180px;
+                width: calc(100% + 40px);
+                margin: -20px -20px 20px -20px;
+            }
+
+            .step-image img {
+                max-height: 140px;
+            }
+
+            .step-number {
+                position: static;
+                transform: none;
+                margin: 0 auto 20px;
+            }
+
+            .worry-list {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-content">
+            <h1>バイブコーディング</h1>
+            <p class="subtitle">読むだけで、創りたくなる。<br>AI時代の新しいものづくりへ、最初の"一歩"を踏み出そう。</p>
+            <a href="#roadmap" class="cta-button">あなたの成長ストーリーを見る</a>
+        </div>
+    </header>
+
+    <!-- ロードマップ -->
+    <section id="roadmap" class="roadmap-section">
+        <h2>読む、学ぶ、創る。<br>バイブコーダーへの3ステップ</h2>
+        <p class="roadmap-subtitle">あなたの成長の旅を、楽しくサポートします</p>
+        
+        <div class="roadmap">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <a href="https://note.com/osushi_san/n/n6e0f65523e02?sub_rt=share_sb" target="_blank" class="step-link">
+                        <div class="step-image">
+                            <img src="images/step1.jpeg" alt="体験記note - バイブコーディングへの第一歩">
+                        </div>
+                        <h3 class="step-title">STEP 1: 憧れる - 冒険の書を手に入れる</h3>
+                        <p class="step-catch">体験記note (買い切り1,980円から)</p>
+                        <p class="step-description">先輩たちのリアルな体験談が、あなたの「やってみたい」に火をつける。まずはこの一冊から、新しい世界の扉を開こう。</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <a href="https://vibecoding.salon/" target="_blank" class="step-link">
+                        <div class="step-image">
+                            <img src="images/step2.jpeg" alt="初心者コミュニティ - 仲間と共に学ぶ">
+                        </div>
+                        <h3 class="step-title">STEP 2: 仲間と学ぶ - 最初の村へ</h3>
+                        <p class="step-catch">初心者コミュニティ (買い切り4,980円から)</p>
+                        <p class="step-description">もう一人じゃない。同じ目標を持つ仲間と、励まし合い、助け合いながら、一歩ずつ着実に進める安心の場所。</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <a href="https://vibe-coding.munakata-engineer.com/" target="_blank" class="step-link">
+                        <div class="step-image">
+                            <img src="images/STEP3.jpeg" alt="プロと開発コミュニティ - 夢を形に">
+                        </div>
+                        <h3 class="step-title">STEP 3: プロと創る - 夢を形に</h3>
+                        <p class="step-catch">プロと開発コミュニティ (最大割引後34,800円)</p>
+                        <p class="step-description">あなたの"作りたい"を、プロのエンジニアが強力にバックアップ。本気でアイデアを形にする、最終ステージへ。</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 共感エリア -->
+    <section class="empathy-section">
+        <h2>"作りたい"は、ある。でも…</h2>
+        <div class="worry-list">
+            <div class="worry-item">何から始めればいいか分からない</div>
+            <div class="worry-item">過去にプログラミングで挫折した</div>
+            <div class="worry-item">一人で続ける自信がない</div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>1,980円から、あなたの"作りたい"を現実に！</h2>
+        <p>この旅は、誰もがSTEP 1の『体験記を読む』ことから始まります。難しいことは何もありません。まずは、先輩たちのワクワクする冒険を覗いてみませんか？</p>
+        <a href="https://note.com/osushi_san/n/n6e0f65523e02?sub_rt=share_sb" class="cta-button" target="_blank">noteを読んで冒険を始める</a>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <h2>よくある質問</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3 class="faq-question">本当にプログラミング知識ゼロでも大丈夫ですか？</h3>
+                <p class="faq-answer">はい、大丈夫です。この旅は、知識ゼロの方を対象に設計されています。STEP1のnoteが、あなたの最高のガイドブックになります。</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">途中で挫折しないか不安です…</h3>
+                <p class="faq-answer">ご安心ください。STEP2のコミュニティでは、たくさんの仲間があなたを待っています。一人で抱え込まず、みんなで支え合いながら進むことができます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <p>運営者情報: バイブコーディング運営チーム</p>
+        <p>&copy; 2024 Vibe Coding. All rights reserved.</p>
+    </footer>
+</body>
+</html>
