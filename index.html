@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>バイブコーディング - AI時代の新しいものづくりへ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,36 +13,76 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.7;
-            color: #333;
-            background-color: #f8f9fa;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
         }
 
         /* ヘッダー */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6B46C1 0%, #9333EA 50%, #EC4899 100%);
             color: white;
-            padding: 80px 20px;
+            padding: 120px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .header::before {
             content: "";
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-            animation: float 20s infinite linear;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(107, 70, 193, 0.3) 0%, transparent 50%);
+            animation: pulse 10s ease-in-out infinite;
         }
 
-        @keyframes float {
-            from { transform: translate(0, 0) rotate(0deg); }
-            to { transform: translate(30px, 30px) rotate(360deg); }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: floatUp 15s infinite linear;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
         }
 
         .header-content {
@@ -52,36 +93,73 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 4rem;
+            margin-bottom: 30px;
+            font-weight: 900;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            letter-spacing: 0.05em;
+            animation: fadeInUp 1s ease-out;
         }
 
         .header .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cta-button {
             display: inline-block;
-            background: #ff6b6b;
+            background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
             color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
+            padding: 20px 60px;
+            border-radius: 60px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(236, 72, 153, 0.4);
+        }
+
+        .cta-button:hover::after {
+            width: 300px;
+            height: 300px;
         }
 
         .cta-button::before {
@@ -106,15 +184,29 @@
 
         /* 共感エリア */
         .empathy-section {
-            padding: 80px 20px;
+            padding: 120px 20px;
             text-align: center;
-            background: white;
+            background: linear-gradient(180deg, #f8f4ff 0%, #ffffff 100%);
+            position: relative;
+        }
+
+        .empathy-section::before {
+            content: "";
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #9333EA, #EC4899);
+            border-radius: 2px;
         }
 
         .empathy-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: #1a1a1a;
+            font-weight: 900;
         }
 
         .worry-list {
@@ -127,18 +219,23 @@
         }
 
         .worry-item {
-            background: #f8f9fa;
-            padding: 20px 30px;
-            border-radius: 20px;
-            border: 2px solid #e9ecef;
+            background: white;
+            padding: 25px 40px;
+            border-radius: 16px;
+            border: 2px solid #f3f4f6;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #4b5563;
+            backdrop-filter: blur(10px);
         }
 
         .worry-item:hover {
-            transform: translateY(-3px);
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+            transform: translateY(-5px);
+            border-color: #ddd6fe;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.15);
+            background: linear-gradient(135deg, #faf5ff, #fdf4ff);
         }
 
         .worry-item::before {
@@ -153,22 +250,37 @@
 
         /* ロードマップ */
         .roadmap-section {
-            padding: 80px 20px;
-            background: linear-gradient(to bottom, #f8f9fa, white);
+            padding: 120px 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f4ff 100%);
+            position: relative;
+        }
+
+        .roadmap-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, transparent 0%, #ffffff 100%);
+            pointer-events: none;
         }
 
         .roadmap-section h2 {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            font-weight: 900;
+            letter-spacing: 0.02em;
         }
 
         .roadmap-subtitle {
             text-align: center;
-            color: #6c757d;
-            margin-bottom: 60px;
-            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 80px;
+            font-size: 1.3rem;
+            font-weight: 500;
         }
 
         .roadmap {
@@ -183,9 +295,10 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
+            width: 2px;
+            background: linear-gradient(to bottom, #9333EA, #EC4899);
             transform: translateX(-50%);
+            opacity: 0.3;
         }
 
         .step {
@@ -194,6 +307,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.2s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .step:nth-child(even) {
@@ -204,11 +334,12 @@
             width: 45%;
             background: white;
             padding: 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .step-link {
@@ -254,17 +385,23 @@
         }
 
         .step-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            border: 2px solid #667eea;
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(147, 51, 234, 0.2);
         }
 
         .step-content:hover .step-title {
-            color: #667eea;
+            color: #9333EA;
         }
 
         .step-content:hover .step-image img {
-            transform: scale(1.08);
+            transform: scale(1.05);
+        }
+
+        .step-content:hover .step-number {
+            background: linear-gradient(135deg, #9333EA, #EC4899);
+            color: white;
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .step-number {
@@ -272,33 +409,38 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: white;
-            border: 4px solid #667eea;
+            border: 3px solid #9333EA;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: #667eea;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: #9333EA;
             z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.2);
         }
 
 
         .step-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-weight: 700;
+            transition: color 0.3s ease;
         }
 
         .step-catch {
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 15px;
+            color: #9333EA;
+            font-weight: 600;
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
+            font-size: 1.1rem;
         }
 
         .step-catch::after {
@@ -318,15 +460,37 @@
 
         /* CTA セクション */
         .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
             color: white;
-            padding: 80px 20px;
+            padding: 120px 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
         }
 
         .cta-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section p {
@@ -338,13 +502,17 @@
 
         .cta-section .cta-button {
             background: white;
-            color: #667eea;
-            font-size: 1.2rem;
-            padding: 20px 50px;
+            color: #7C3AED;
+            font-size: 1.3rem;
+            padding: 25px 70px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section .cta-button:hover {
-            background: #f8f9fa;
+            background: #faf5ff;
+            color: #6D28D9;
         }
 
         .cta-section .cta-button::before {
@@ -354,15 +522,16 @@
 
         /* FAQ */
         .faq-section {
-            padding: 80px 20px;
+            padding: 120px 20px;
             background: white;
         }
 
         .faq-section h2 {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 70px;
+            color: #1a1a1a;
+            font-weight: 900;
         }
 
         .faq-container {
@@ -372,14 +541,17 @@
 
         .faq-item {
             margin-bottom: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
+            background: #faf5ff;
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e9d5ff;
         }
 
         .faq-item:hover {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(147, 51, 234, 0.1);
+            background: white;
         }
 
         .faq-question {
@@ -393,16 +565,17 @@
 
         .faq-question::before {
             content: "Q";
-            background: #667eea;
+            background: linear-gradient(135deg, #9333EA, #EC4899);
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         .faq-answer {
@@ -476,6 +649,17 @@
             <h1>バイブコーディング</h1>
             <p class="subtitle">読むだけで、創りたくなる。<br>AI時代の新しいものづくりへ、最初の"一歩"を踏み出そう。</p>
             <a href="#roadmap" class="cta-button">あなたの成長ストーリーを見る</a>
+        </div>
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
         </div>
     </header>
 
