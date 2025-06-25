@@ -22,9 +22,8 @@
 
         /* ヘッダー */
         .header {
-            background: linear-gradient(135deg, #6B46C1 0%, #9333EA 50%, #EC4899 100%);
             color: white;
-            padding: 120px 20px;
+            padding: 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -32,6 +31,80 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 0 40px;
+        }
+
+        .header-slide {
+            position: relative;
+            width: 30%;
+            max-width: 400px;
+            height: 70%;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-slide:nth-child(1) {
+            transform: translateY(30px) rotate(-5deg);
+            z-index: 1;
+        }
+
+        .header-slide:nth-child(2) {
+            z-index: 3;
+            transform: scale(1.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-slide:nth-child(3) {
+            transform: translateY(30px) rotate(5deg);
+            z-index: 1;
+        }
+
+        .header-slide:hover {
+            transform: translateY(0) rotate(0) scale(1.05);
+            z-index: 4;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-out;
+        }
+
+        .header-slide:hover img {
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .header::before {
@@ -86,30 +159,40 @@
         }
 
         .header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            max-width: 700px;
+            width: 90%;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .header h1 {
-            font-size: 4rem;
-            margin-bottom: 30px;
+            font-size: 3rem;
+            margin-bottom: 20px;
             font-weight: 900;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-shadow: 0 3px 10px rgba(0,0,0,0.5);
             letter-spacing: 0.05em;
             animation: fadeInUp 1s ease-out;
         }
 
         .header .subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 50px;
-            opacity: 0.9;
-            max-width: 700px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 1s ease-out 0.3s both;
-            line-height: 1.8;
+            line-height: 1.6;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         @keyframes fadeInUp {
@@ -604,7 +687,24 @@
         /* レスポンシブ */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+
+            .header-background {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+            }
+
+            .header-slide {
+                width: 80%;
+                height: 25%;
+                transform: none !important;
+            }
+
+            .header-content {
+                bottom: 20px;
+                padding: 30px 20px;
             }
 
             .roadmap::before {
@@ -645,6 +745,18 @@
 <body>
     <!-- ヘッダー -->
     <header class="header">
+        <div class="header-background">
+            <div class="header-slide">
+                <img src="images/gazou1.jpeg" alt="バイブコーディング イメージ1">
+            </div>
+            <div class="header-slide">
+                <img src="images/gazou2.jpeg" alt="バイブコーディング イメージ2">
+            </div>
+            <div class="header-slide">
+                <img src="images/gazou3.jpeg" alt="バイブコーディング イメージ3">
+            </div>
+        </div>
+        <div class="header-overlay"></div>
         <div class="header-content">
             <h1>バイブコーディング</h1>
             <p class="subtitle">読むだけで、創りたくなる。<br>AI時代の新しいものづくりへ、最初の"一歩"を踏み出そう。</p>
